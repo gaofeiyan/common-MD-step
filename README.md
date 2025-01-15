@@ -78,6 +78,21 @@ gmx rmsf -f analyze.xtc -s md.tpr -o rmsf.xvg -n prolig_center.ndx
 gmx hbond -f analyze.xtc -s md.tpr -n prolig_center.ndx -num -hbn -hbm
 
 
+gmx rms -s md.tpr -f md.xtc -o FEL_rmsd.xvg -n prolig_center.ndx
+  4 4 
+  
+gmx gyrate -s md.tpr -f md.xtc -o FEL_gyrate.xvg -n prolig_center.ndx
+  4
+  合并
+gmx sham -tsham 310 -nlevels 100 -f output.xvg -ls gibbs.xpm -g gibbs.log -lsh enthalpy.xpm -lss entropy.xpm
+
+python xpm2png.py -ip yes -f gibbs.xpm (sources/xpm_show/xpm2png.py)
+
+# MM/PBSA
+chmod +x gmx_mmpbsa.bash
+
+bash gmx_mmpbsa.bash
+
 
 
 
