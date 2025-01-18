@@ -72,7 +72,9 @@ gmx sasa -f prolig_fit.xtc -s md.tpr -o md-area.xvg
 
 gmx trjconv -f prolig_fit.xtc -b 60000 -e 100000 -o analyze.xtc 
 
-gmx rmsf -f analyze.xtc -s md.tpr -o rmsf.xvg -n prolig_center.ndx
+gmx rmsf -f analyze.xtc -s md.tpr -o rmsf.xvg -res -n prolig_center.ndx
+
+select Backbone group.
 
 
 gmx hbond -f analyze.xtc -s md.tpr -n prolig_center.ndx -num -hbn -hbm
