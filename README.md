@@ -30,7 +30,7 @@ gmx solvate -cp complex_box.gro -o complex_sol.gro -p topol.top
   生成em.tpr文件用于修改体系电荷
 gmx grompp -f em.mdp -c complex_sol.gro -p topol.top -o em.tpr -maxwarn 10
   添加离子，使体系平衡
-gmx genion -s em.tpr -p topol.top -o system.gro -neutral
+gmx genion -s em.tpr -p topol.top -o system.gro -neutral   
   选水，意味着将部分水替换成离子
 选15
   以下为能量极小化的准备与正式运行
