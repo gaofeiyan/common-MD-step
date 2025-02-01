@@ -88,6 +88,8 @@ gmx gyrate -s md.tpr -f md.xtc -o FEL_gyrate.xvg -n prolig_center.ndx
   合并
 gmx sham -tsham 310 -nlevels 100 -f output.xvg -ls gibbs.xpm -g gibbs.log -lsh enthalpy.xpm -lss entropy.xpm
 
+gmx trjconv -s md.tpr -f noPBC_step1.trr -o 4194.pdb -sep -b 4100 -e 4100 -pbc mol -n prolig_center.ndx
+
 python xpm2png.py -ip yes -f gibbs.xpm (sources/xpm_show/xpm2png.py)
 
  MM/PBSA
