@@ -64,6 +64,9 @@ gmx make_ndx -f md.gro -o prolig_center.ndx
 gmx trjconv -s md.tpr -f md.xtc -o prolig_fit.xtc -pbc mol -center -n prolig_center.ndx
 运行命令之后先选择校正中心为Protein_MOL，然后选择对整个体系进行校正。输入0
 
+#轨迹可视化
+gmx trjconv -s md.tpr -f prolig_fit.xtc -o traj.pdb -n prolig_center.ndx -dt 100 
+
 gmx rms -f prolig_fit.xtc -s md.tpr -o md-rmsd.xvg 
 
 gmx gyrate -s md.tpr -f prolig_fit.xtc -o md-gyrate.xvg 
