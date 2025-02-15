@@ -28,13 +28,13 @@ gmx editconf -f protein.gro -o complex_box.gro -d 1.0 -bt cubic
 gmx solvate -cp complex_box.gro -o complex_sol.gro -p topol.top
 
   生成em.tpr文件用于修改体系电荷
-gmx grompp -f em.mdp -c complex_sol.gro -p topol.top -o em.tpr -maxwarn 10
+gmx grompp -f em.mdp -c complex_sol.gro -r complex_sol.gro -p topol.top -o em.tpr -maxwarn 10
   添加离子，使体系平衡
 gmx genion -s em.tpr -p topol.top -o system.gro -neutral   
   选水，意味着将部分水替换成离子
 选15
   以下为能量极小化的准备与正式运行
-gmx grompp -f em.mdp -c system.gro -p topol.top -o em.tpr 
+gmx grompp -f em.mdp -c system.gro -r system.gro  -p topol.top -o em.tpr -maxwarn 10
 gmx mdrun -v -deffnm em
   以下为限制性动力学的准备与正式运行
 gmx grompp -f pr.mdp -c em.gro -p topol.top -r em.gro -o pr.tpr -maxwarn 10
@@ -47,7 +47,7 @@ gmx make_ndx -f pr.gro
 输入name 23 envir
 输入q
   这是正式分子动力学模拟的准备
-gmx grompp -f md.mdp -c pr.gro -p topol.top -o md.tpr -n index.ndx -maxwarn 5
+gmx grompp -f md.mdp -c pr.gro -r pr.gro -p topol.top -o md.tpr -n index.ndx -maxwarn 11
 
 md.mdp文件中要修改：(or)
 comm-grps  = Protein_MOL  tc_grps = Protein_MOL Water_and_ions
