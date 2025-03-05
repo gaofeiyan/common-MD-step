@@ -12,9 +12,9 @@ gmx genrestr -f molecule.gro -o posre_lig.itp
 选0
   将配体itp文件引入限制文件的参数中，针对配体也进行限制
 修改ligand的itp文件，在最末尾添加以下命令  
-ifdef POSRES
-include "posre_lig.itp"
-endif
+#ifdef POSRES
+#include "posre_lig.itp"
+#endif
   将配体的top文件与蛋白质top文件进行合并 合并到蛋白质文件
 在topol.top文件的include "amber14sb_parmbsc1.ff/forcefield.itp"后面空行添加以下命令
 ; Include ligand topologies
